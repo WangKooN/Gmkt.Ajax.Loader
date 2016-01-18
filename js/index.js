@@ -7,25 +7,25 @@ $(document).ready(function(){
 		dataType : 'jsonp'
 	});	
 
-})
+});
 
 $.fn.gmktGoodsInfoLoad = function(options) {
 	var elements = this;
 	var settings = {
 		reqData : null,
-		dataType : 'jsonp'
+		dataType : 'jsonp', // Jsonp, Xml, Json
+        imgType : 'default' // Default, Manual
 	};
 
 	// Generate URL + Query
 	var genQuery = function(data){
 		
 		var result; // Query for Return Value
-		var array; // Goodscode
+		var array = data.goods;; // Goodscode
 
 		if ( data.type == 'GMARKET_GOODS' ){
 
 			result = "http://m.gmarket.co.kr/Event/2014/01/0106_specialprice/data.asp?type=searchJson&goodscode=";
-			array = data.goods;			
 
 			for ( var i = 0 ; i < array.length ; i++ ){
 
@@ -45,7 +45,6 @@ $.fn.gmktGoodsInfoLoad = function(options) {
 		
 		return result;
 	}
-	
 
 	var init = function(){
 
@@ -88,7 +87,7 @@ $.fn.gmktGoodsInfoLoad = function(options) {
 
 					if ( ++nowTimes < loadTimes ) {
 						
-						jsonData.setUrl( genQuery(settings.reqData[nowTimes]) , "info");
+						jsonData.setUrl( genQuery(settings.reqData[nowTimes]) , "info" );
 
 					}else{
 
@@ -108,15 +107,26 @@ $.fn.gmktGoodsInfoLoad = function(options) {
 	}
 
 	var releaseGoods = function(data){
+		
+        var showGoods = new markupSelector();
 
-		//console.log(loadedData);
-		$(loadedData).each(function(e){
+		$(data).each(function(e){
 
-			console.debug( $(this)[0].event );
+            $eventData = $(this)[0].event;
 
+            if ( $eventData != null ){
+
+                showGoods.setdata( settings.reqData[e], $eventData , elements );
+
+            }else{
+
+                console.log (' Goods Data Not Found ');
+
+            }
+			
 		});
 
-	}
+	}    
 
 	$(document).ready(function() {
 
@@ -132,6 +142,7 @@ $.fn.gmktGoodsInfoLoad = function(options) {
     
     return this;
 };
+
 
 
 function Jsonload(){
@@ -162,123 +173,159 @@ Jsonload.prototype.setUrl = function(_url , _callbackname){
 Jsonload.prototype.dataLoadComplete = function(data){};
 
 
+function markupSelector(){
 
+    this._init.apply( this );
 
+}
 
+markupSelector.prototype = {
 
+    _init : function(){
 
-// function gmkGoodsInfo(){
+        var self = this;
 
-// }
+    },
+    setdata : function(reqData,resData,elem){
 
-// Prototype :: Gmarket Goods Info Load
-var gmkGoodsInfo = function(array,target){    
+        self._reqData = reqData;
+        self._resData = resData;
 
-    // @@ val : 'GMARKET_GOODS' = 상품 번호로 정보 가져오기
-    // @@ val : 'GMARKET_EVENT' = 이벤트상품관리 상품정보 가져오기    
-    loadType = 'GMARKET_GOODS';
-
-    // Input Data
-    inputData = function(){
-        console.log(array);
-    }
-
-    // Target DOM    
-    targetPos = function(){
-        console.log(target);
-    }
-
-    // Generate URL + Query
-    genQuery = function(){
-
-        var result;
-        
-        if ( loadType == 'GMARKET_GOODS' ){
-
-            result = "http://m.gmarket.co.kr/Event/2014/01/0106_specialprice/data.asp?type=searchJson&goodscode=";
-            
-            for ( var i = 0 ; i < array.length ; i++ ){
-                ( i === 0 ) ? result += array[i].goodscode : result += "," + array[i].goodscode;
-            }   
-
-        }else if( loadType == 'GMARKET_EVENT' ){
-
-            result = "http://event.gmarket.co.kr/html/201401/140102_newYear_sub/newYear_sub1.asp?group_no="+array;
-
-        }else{
-
-            result = "http://m.gmarket.co.kr/Event/2014/01/0106_specialprice/data.asp?type=searchJson&goodscode=000000000";
-
-        }
-
-        return result;        
-
-    }
-
-    // Fnc :: Image URL Generator
-    genImgUrl = function(data){
+        this.execute(elem);
+    },
+    genImgUrl : function(data){
 
         return "http://gdimg.gmarket.co.kr/goods_image2/shop_img/"+data.substr(0,3)+"/"+data.substr(3,3)+"/"+data+".jpg";
 
-    }
+    },
+    salePercent : function(val,val2){
 
-    // Fnc :: Discount Rate Calculation
-    salePercent = function(val,val2){
+        // Delete ","
+        val = parseInt(val.replace(/,/g,""),10);
+        val2 = parseInt(val2.replace(/,/g,""),10);
 
         var result;
 
         ( val !== val2 ) ? result = ( 1 -(val / val2) ) * 100 : result = 0;
-        
+
         return parseInt(result,10);
 
-    }
+    },
+    genPrice : function(data){
 
-    // Goods Info Design Set
-    releaseMarkup = function(data,idx){
+        var _reg = /(\d)(?=(?:\d{3})+(?!\d))/g; // regular expression
 
-        reg = /(\d)(?=(?:\d{3})+(?!\d))/g; // regular expression
-
-        $loc = $(target);
-
-        $loc.append(''
-        +'<li>'
-        +'    <a href="http://item2.gmarket.co.kr/Item/DetailView/Item.aspx?goodscode='+data.pGoods+'" target="_blank">'
-        +'        <span class="sd_img"><img src="'+this.genImgUrl(data.pGoods)+'" alt="'+data.pEventItemName+'"></span>'
-        +'        <span class="sd_title">'
-        +'        <strong class="subject">'+data.pEventItemName+'</strong>'
-        +'        </span>'
-        +'        <span class="sd_icons">'
-        +'            <span class="icons4">무료배송</span>'
-        +'        </span>'
-        +'        <span class="sd_money">'
-        +'            <span class="sd_icons">'
-        +'                <strong class="icon_precent">'+this.salePercent(data.pEventPrice,data.pDiscountPrice)+'<em>%</em></strong>'
-        +'            </span>'
-        +'            <span class="sd_money_sale">'
-        +'                <del>'+data.pDiscountPrice.replace(reg, '$1,')+'</del>'
-        +'                <strong>'+data.pEventPrice.replace(reg, '$1,')+'</strong>'
-        +'            </span>'
-        +'        </span>'
-        +'    </a>'
-        +'</li>');
-
-        $this_list = $loc.find("li").eq(idx);
-
-        if ( $this.pEventDelivery != '무료' ){
-            $this_list.find(".icons4").remove();
+        if( data.indexOf(",") == -1 ){
+            return data.replace(_reg, '$1,');
+        }else{
+            return data;
         }
 
-        if ( $this.pEventPrice == $this.pDiscountPrice ){
-            $this_list.find(".sd_money_sale del").html("");
-            $this_list.find(".sd_money .icon_precent").remove();
+    },
+    designType : function(type,info){
+
+        var elem;
+
+        if ( type == 'type1' ){
+
+            elem = ''
+            +'<li>'
+            +'    <a href="http://item2.gmarket.co.kr/Item/DetailView/Item.aspx?goodscode='+info.pGoods+'" target="_blank">'
+            +'        <span class="sd_img"><img src="'+this.genImgUrl(info.pGoods)+'" alt="'+info.pEventItemName+'"></span>'
+            +'        <span class="sd_title">'
+            +'        <strong class="subject">'+info.pEventItemName+'</strong>'
+            +'        </span>'
+            +'        <span class="sd_icons">'
+            +'            <span class="icons4">무료배송</span>'
+            +'        </span>'
+            +'        <span class="sd_money">'
+            +'            <span class="sd_icons">'
+            +'                <strong class="icon_precent">'+this.salePercent(info.pEventPrice,info.pDiscountPrice)+'<em>%</em></strong>'
+            +'            </span>'
+            +'            <span class="sd_money_sale">'
+            +'                <del>'+this.genPrice(info.pDiscountPrice)+'</del>'
+            +'                <strong>'+this.genPrice(info.pEventPrice)+'</strong>'
+            +'            </span>'
+            +'        </span>'
+            +'    </a>'
+            +'</li>';            
+
+        }else{
+
+            console.log(' Type is Not Found ');
+
         }
 
-    }
+        return elem;
 
-    // ajax Data Load
-    this.load = function(){
+    },
+    execute : function(elem){
 
+        var $this = this;
+
+        $(self._resData).each(function(e){
+            
+            $(elem).find(self._reqData.target).append(
+                $this.designType( self._reqData.design, self._resData[e] )
+            );
+
+            // $this_list = $(elem).find(self._reqData.target).find("li").eq(e);
+
+            // if ( self._resData[e].pEventDelivery != '무료' ){
+            //     $this_list.find(".icons4").remove();
+            // }
+
+            // if ( self._resData[e].pEventPrice == self._resData[e].pDiscountPrice ){
+            //     $this_list.find(".sd_money_sale del").html("");
+            //     $this_list.find(".sd_money .icon_precent").remove();
+            // }            
+
+        });
+
+        //console.log(self._reqData);
+        //console.log(self._resData);
     }
 
 }
 
+
+    // releaseMarkup = function(data,idx){
+
+    //     reg = /(\d)(?=(?:\d{3})+(?!\d))/g; // regular expression
+
+    //     $loc = $(target);
+
+    //     $loc.append(''
+    //     +'<li>'
+    //     +'    <a href="http://item2.gmarket.co.kr/Item/DetailView/Item.aspx?goodscode='+data.pGoods+'" target="_blank">'
+    //     +'        <span class="sd_img"><img src="'+this.genImgUrl(data.pGoods)+'" alt="'+data.pEventItemName+'"></span>'
+    //     +'        <span class="sd_title">'
+    //     +'        <strong class="subject">'+data.pEventItemName+'</strong>'
+    //     +'        </span>'
+    //     +'        <span class="sd_icons">'
+    //     +'            <span class="icons4">무료배송</span>'
+    //     +'        </span>'
+    //     +'        <span class="sd_money">'
+    //     +'            <span class="sd_icons">'
+    //     +'                <strong class="icon_precent">'+this.salePercent(data.pEventPrice,data.pDiscountPrice)+'<em>%</em></strong>'
+    //     +'            </span>'
+    //     +'            <span class="sd_money_sale">'
+    //     +'                <del>'+data.pDiscountPrice.replace(reg, '$1,')+'</del>'
+    //     +'                <strong>'+data.pEventPrice.replace(reg, '$1,')+'</strong>'
+    //     +'            </span>'
+    //     +'        </span>'
+    //     +'    </a>'
+    //     +'</li>');
+
+    //     $this_list = $loc.find("li").eq(idx);
+
+    //     if ( $this.pEventDelivery != '무료' ){
+    //         $this_list.find(".icons4").remove();
+    //     }
+
+    //     if ( $this.pEventPrice == $this.pDiscountPrice ){
+    //         $this_list.find(".sd_money_sale del").html("");
+    //         $this_list.find(".sd_money .icon_precent").remove();
+    //     }
+
+    // }

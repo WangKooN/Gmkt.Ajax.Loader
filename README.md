@@ -45,6 +45,18 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ```
 
+- 그룹코드를 통한 정보 받기
+```java
+
+{
+	"type" : "GMARKET_EVENT"	// 타입선택
+	"target" : ".item_list2",	// Wrapper 클래스
+	"design" : "type1",		// 디자인 선택
+	"goods" : "13447"		// 그룹코드
+}
+
+```
+
 ## Demos
 
 

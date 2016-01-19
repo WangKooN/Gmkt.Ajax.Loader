@@ -78,3 +78,9 @@ $(document).ready(function(){
 - http://event.gmarket.co.kr/html/201601/00_brand/plugin/index.html
 
 
+## Caution
+
+- 본 플러그인은 언제든지 다른 목적으로 수정될 수 있음.
+- 외부 서버에서의 사용을 금지함.
+- 프로모션 이외의 용도에서 사용시 생기는 문제에 대해 책임 지지 않음.
+

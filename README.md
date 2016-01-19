@@ -7,7 +7,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ## 사용법
 
-** <head></head>내 추가
+** `<head></head>`내 추가
 ```html
   <!-- Library -->
 	<script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>

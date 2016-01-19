@@ -12,7 +12,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 - Version 0.1.160118 : 플러그인 Github 공개
 
 
-## Using
+## Usage
 
 
 #### Step1. index.html `<head></head>` 추가

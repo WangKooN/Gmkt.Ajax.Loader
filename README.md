@@ -2,8 +2,10 @@
 https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ## Summary
+- 상품코드를 통해 상품의 정보 (가격/이미지/배송구분 등)을 가져올 수 있습니다.
+- 이벤트 상품관리 코드를 통해 코드내 상품의 정보를 가져올 수 있습니다.
 
-## Upated
+## Upates
 
 ## Using
 

@@ -4,28 +4,58 @@
 <title>GMARKET</title>
 	<meta http-equiv="content-Type" content="text/html;charset=euc-kr" />
 	<meta name="format-detection" content="telephone=no">
-	<meta name="viewport" id="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width" />
-	<link rel="apple-touch-icon-precomposed" href="http://image.gmarket.co.kr/Gmarket_Mobile_Image/icon_01.png">
+	<meta name="viewport" id="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width" />	
 	<style>
-		*{margin:0;padding:0;font-style:normal;border:0}
+		@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css); 
+		*{margin:0;padding:0;font-style:normal;border:0;text-decoration:none;color:#333;}
 		li{list-style:none}
-		#p_wrapper {font-family:'tahoma','Malgun Gothic',sans-serif;font-size:16px}
-		#p_wrapper h1{padding:40px 0 20px;text-align:center}
+		#p_wrapper {font-family:'tahoma','Nanum Gothic','Malgun Gothic',sans-serif;font-size:20px}
+		#p_wrapper h1{padding:50px 0 30px;text-align:center;font-weight:bold;border-bottom:1px solid #ddd;margin-bottom:30px;}
+		#p_wrapper h1 p{text-align:center;margin-top:20px;}
+		#p_wrapper h2{font-size:12px;text-align:left;font-weight:normal}
+		#p_wrapper h2 strong{font-size:14px}
+		#p_wrapper h2 .font_red{color:red;}
 		#p_wrapper ul li{min-height:395px}
-		#p_wrapper .footer{width:1000px;margin:0 auto;padding:30px 0;border-top:1px solid #ccc;text-align:center;font-size:12px;color:#333}
+		#p_wrapper .item_list{border:0;padding:10px 0 40px;}
+		#p_wrapper .footer{width:1000px;margin:0 auto;padding:30px 0;border-top:1px solid #ccc;text-align:center;font-size:12px}
 	</style>
 	<link rel="stylesheet" type="text/css" href="http://script.gmarket.co.kr/pc/css/ko/corner/superdeal.css" />
+	<!-- Library -->
 	<script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="js/loader_data.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
+	<!-- Request -->
+	<script type="text/javascript" src="js/loader_data.js"></script>	
+	<!-- Plug-in -->
+	<script type="text/javascript" src="js/Gmkt.ajax.loader.js"></script>
+	<!-- User Custom Script -->
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			// Gmarket Goods Info Load			
+			$("#p_wrapper").show().GmktAjaxLoader({
+				reqData : gmktGoodsReqData,
+				dataType : 'jsonp'
+			});	
+
+		});
+
+	</script>
 </head>
 <body>
 <div id="p_wrapper">
-	<h1>G-market Goods Info Ajax Loader</h1>
+	<h1>
+		G-market Goods Info Ajax Loader
+		<p><a href="https://github.com/WangKooN/Gmkt.Ajax.Loader" target="_blank"><img src="http://www.aha.io/assets/integration_logos/github-bb449e0ffbacbcb7f9c703db85b1cf0b.png" style="width:100px;"/></a></p>	
+	</h1>
 	
 	<div class="super_deal_con">
+		
+		<h2><strong>1. 상품코드 직접 로드</strong> --- > http://m.gmarket.co.kr/Event/2014/01/0106_specialprice/data.asp?type=searchJson&goodscode=<span class="font_red">상품코드</span></h2>
 		<ul class="item_list item_list1"></ul>
+
+		<h2><strong>2. 이벤트상품관리 그룹 로드</strong> --- > http://event.gmarket.co.kr/html/201401/140102_newYear_sub/newYear_sub1.asp?group_no=<span class="font_red">그룹코드</span></h2>
 		<ul class="item_list item_list2"></ul>
+
 	</div>
 
 	<div class="footer">

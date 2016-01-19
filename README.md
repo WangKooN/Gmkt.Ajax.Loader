@@ -27,33 +27,21 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 - 상품코드를 통한 정보 받기
 ```java
 {
-		"type" : "GMARKET_GOODS",
-		"target" : ".item_list1",
-		"design" : "type1",
-		"goods" : [
-			{
-				"pGoods" : 760411039,
-				"pItemName" : "",
-				"pImgLoc" : ""
-			},{
-				"pGoods" : 668830827,
-				"pItemName" : "",
-				"pImgLoc" : ""
-			},{
-				"pGoods" : 740715007,
-				"pItemName" : "",
-				"pImgLoc" : ""
-			},{
-				"pGoods" : 744024086,
-				"pItemName" : "",
-				"pImgLoc" : ""
-			},{
-				"pGoods" : 714093622,
-				"pItemName" : "",
-				"pImgLoc" : ""
-			}
-		]
-	}
+	"type" : "GMARKET_GOODS",	// 타입선택 (상품)
+	"target" : ".item_list1",	// Wrapper 클래스
+	"design" : "type1", 		// 디자인 선택
+	"goods" : [
+		{
+			"pGoods" : 760411039,	// 상품번호 (필수)
+			"pItemName" : "",	// 상품명 (선택)
+			"pImgLoc" : ""		// 상품이미지경로 (선택)
+		},{
+			"pGoods" : 668830827,
+			"pItemName" : "",
+			"pImgLoc" : ""
+		}
+	]
+}
 
 ```
 

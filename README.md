@@ -1,9 +1,11 @@
 # Gmkt.Ajax.Loader v0.1.160118
 https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
-## Updates
+## 개요
 
-## Using
+## 업데이트
+
+## 사용법
 
 ```html
   <!-- Library -->

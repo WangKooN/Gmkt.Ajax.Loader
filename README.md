@@ -9,6 +9,10 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ## Upates
 
+** Version 0.1.160118 **
+** 플러그인 Github 공개
+
+
 ## Using
 
 

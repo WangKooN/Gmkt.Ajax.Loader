@@ -11,6 +11,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ## Using
 
+
 #### Step1. index.html `<head></head>` 추가
 ```html
 
@@ -23,9 +24,10 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ```
 
+
 #### Step2. 상품번호 또는 이벤트 상품관리 코드를 넘겨줄 데이터 작성
 - 상품코드를 통한 정보 받기
-```java
+```javascript
 {
 	"type" : "GMARKET_GOODS",	// 타입선택 (상품)
 	"target" : ".item_list1",	// Wrapper 클래스
@@ -46,7 +48,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 ```
 
 - 그룹코드를 통한 정보 받기
-```java
+```javascript
 
 {
 	"type" : "GMARKET_EVENT"	// 타입선택
@@ -54,6 +56,20 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 	"design" : "type1",		// 디자인 선택
 	"goods" : "13447"		// 그룹코드
 }
+
+```
+
+#### Step3. 플러그인 호출
+```javascript
+
+$(document).ready(function(){
+
+	$("#p_wrapper").show().GmktAjaxLoader({
+		reqData : gmktGoodsReqData,	// 상품번호(그룹코드)를 담은 변수명
+		dataType : 'jsonp'		// Ajax로 받아올 데이터 타입명 ( jsonp / json / xml )
+	});	
+
+});
 
 ```
 

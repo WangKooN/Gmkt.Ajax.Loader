@@ -11,7 +11,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
 ## Using
 
-#### - index.html `<head></head>` 추가
+#### Step1. index.html `<head></head>` 추가
 ```html
 
 <!-- Library :: 라이브러라 -->
@@ -22,6 +22,14 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 <script type="text/javascript" src="js/Gmkt.ajax.loader.js"></script>
 
 ```
+
+#### Step2. 상품번호 또는 이벤트 상품관리 코드를 넘겨줄 데이터 작성
+- 상품코드를 통한 정보 받기
+```
+sfsaffsd
+
+```
+
 ## Demos
 
 

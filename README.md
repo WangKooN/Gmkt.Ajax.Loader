@@ -1,11 +1,11 @@
 # Gmkt.Ajax.Loader v0.1.160118
 https://github.com/WangKooN/Gmkt.Ajax.Loader/
 
-## 개요
+## Summary
 
-## 업데이트
+## Upated
 
-## 사용법
+## Using
 
 #### - index.html `<head></head>` 추가
 ```html
@@ -18,7 +18,7 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 <script type="text/javascript" src="js/Gmkt.ajax.loader.js"></script>
 
 ```
-## 샘플
+## Demos
 
 
 

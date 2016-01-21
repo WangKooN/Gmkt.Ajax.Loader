@@ -4,8 +4,6 @@ https://github.com/WangKooN/Gmkt.Ajax.Loader/
 ## Summary
 - 상품코드를 통해 판매상품의 정보를 가져올 수 있습니다.
 - 이벤트 상품관리 코드를 통해 그룹내 진열된 상품의 정보를 가져올 수 있습니다.
-- 디자인을 원하는 대로 입힐 수 있습니다.
-- 웹 / 모바일 모두 사용 가능합니다.
 
 ## Upates
 
@@ -79,11 +77,4 @@ $(document).ready(function(){
 ## Demos
 
 - http://event.gmarket.co.kr/html/201601/00_brand/plugin/index.html
-
-
-## Caution
-
-- 본 플러그인은 언제든지 다른 목적으로 수정될 수 있음.
-- 외부 서버에서의 사용을 금지함.
-- 프로모션 이외의 용도에서 사용시 생기는 문제에 대해 책임 지지 않음.
 
